@@ -10,14 +10,14 @@ pipeline{
 	    registryCredential: "ecr:us-east-1:awscreds"
 		imageName: "951401132355.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg"
 		vprofileRegistry: "https://951401132355.dkr.ecr.us-east-1.amazonaws.com"
-		cluster:
-		service:
+		cluster: "vprofile"
+		service: "vprofileappsvc"
 	}
 	
 	stages{
 	    stage("fetch code"){
 		    steps{
-			    git branch: "docker", url: "http://github.com/hkhcoder/vprofile-project.git"
+			    git branch: "atom", url: "http://github.com/Parulsingh87/vprofile.git"
 			}
 		}
 		
@@ -59,8 +59,8 @@ pipeline{
 						-DprojectVersion = 1.0 \
 						-Dsonar.sources = src/ \
 						-Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
-                        -Dsonar.junit.reportsPath=target/surefire-reports/ \
-                        -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                                                -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                                                -Dsonar.jacoco.reportsPath=target/jacoco.exec \
 						-Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
 					'''
 				}      
